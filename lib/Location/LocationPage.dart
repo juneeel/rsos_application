@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rsos_application/Location/Destination.dart';
-import 'package:rsos_application/Location/GasNearby.dart';
+import 'package:rsos_application/Location/Destination/Destination.dart';
+import 'package:rsos_application/Location/GasNearby/GasNearby.dart';
 import 'package:rsos_application/components/constant.dart';
+
+// import 'ViewMap.dart';
 
 class LocationPage extends StatefulWidget {
   @override
@@ -41,9 +43,9 @@ Widget _buildGasNearbyButton(BuildContext context) {
               borderRadius: BorderRadius.circular(30.0),
             ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GasNearby()));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => ViewMap()));
             },
             child: Text(
               "Gas Nearby",

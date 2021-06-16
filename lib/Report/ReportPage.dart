@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rsos_application/Location/Destination.dart';
-import 'package:rsos_application/Location/GasNearby.dart';
+import 'package:rsos_application/Location/Destination/Destination.dart';
+import 'package:rsos_application/Location/GasNearby/GasNearby.dart';
 import 'package:rsos_application/components/constant.dart';
 
 class ReportPage extends StatefulWidget {

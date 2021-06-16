@@ -1,108 +1,126 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:rsos_application/LogReg/Login.dart';
+import 'package:rsos_application/LogReg/Register.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rsos_application/components/constant.dart';
 
-class HomePage extends StatefulWidget {
+class Start extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _StartState createState() => _StartState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _StartState extends State<Start> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<UserCredential> googleSignIn() async {
+    GoogleSignIn googleSignIn = GoogleSignIn();
+    GoogleSignInAccount googleUser = await googleSignIn.signIn();
+    if (googleUser != null) {
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      if (googleAuth.idToken != null && googleAuth.accessToken != null) {
+        final AuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+
+        final UserCredential user =
+        await _auth.signInWithCredential(credential);
+
+        await Navigator.pushReplacementNamed(context, "/");
+
+        return user;
+      } else {
+        throw StateError('Missing Google Auth Token');
+      }
+    } else
+      throw StateError('Sign in Aborted');
+  }
+
+  navigateToLogin() async {
+    Navigator.pushReplacementNamed(context, "Login");
+  }
+
+  navigateToRegister() async {
+    Navigator.pushReplacementNamed(context, "SignUp");
+  }
+
   @override
-
-  Widget _buildLogo() {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0),
-            child: Image.asset('assets/img/IconNoBackground.png', height:400,width: 300,),
-          ),
-        ]
-    );
-  }
-  Widget _buildGetStartedButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          height: 1.4 * (MediaQuery.of(context).size.height / 20),
-          width: 5 * (MediaQuery.of(context).size.width / 10),
-          margin: EdgeInsets.only(bottom: 5),
-          child: RaisedButton(
-            elevation: 5.0,
-            color: TC,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
-            },
-            child: Text(
-              "Get Started",
-              style: TextStyle(
-                color: Colors.white,
-                letterSpacing: 1.5,
-                fontSize: MediaQuery.of(context).size.height / 40,
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-  Widget _buildWelcome() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(bottom: 40),
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                  text: 'Welcome to RSOS Application',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.height / 30,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ]),
-            ),
-          ),
-      ],
-    );
-  }
-
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xfff2f3f7),
-        body: Stack(
+    return Scaffold(
+      backgroundColor: BG,
+      body: Container(
+        child: Column(
           children: <Widget>[
+            SizedBox(height: 35.0),
             Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: BG,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: const Radius.circular(70),
-                    bottomRight: const Radius.circular(70),
-                  ),
-                ),
+              height: 400,
+              child: Image(
+                image: AssetImage("assets/img/IconNoBackground.png"),
+                fit: BoxFit.contain,
               ),
             ),
-            ListView(
+            SizedBox(height: 20),
+            RichText(
+                text: TextSpan(
+                    text: 'Welcome to ',
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'RSOS',
+                          style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red))
+                    ])),
+            SizedBox(height: 10.0),
+            Text(
+              'Application that you need in your riding needs!',
+              style: TextStyle(color: Colors.white),
+            ),
+            SizedBox(height: 30.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _buildLogo(),
-                _buildWelcome(),
-                _buildGetStartedButton()
+                RaisedButton(
+                    padding: EdgeInsets.only(left: 30, right: 30),
+                    onPressed: navigateToLogin,
+                    child: Text(
+                      'LOGIN',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    color: Colors.orange),
+                SizedBox(width: 20.0),
+                RaisedButton(
+                    padding: EdgeInsets.only(left: 30, right: 30),
+                    onPressed: navigateToRegister,
+                    child: Text(
+                      'REGISTER',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    color: Colors.orange),
               ],
-            )
+            ),
+            SizedBox(height: 20.0),
+            SignInButton(Buttons.Google,
+                text: "Sign up with Google", onPressed: googleSignIn)
           ],
         ),
       ),

@@ -85,7 +85,7 @@ class _ForgetConfirmState extends State<ForgetConfirm> {
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => Login()));
               },
               child: Text(
                 "Continue",

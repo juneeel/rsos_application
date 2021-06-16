@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rsos_application/Location/Destination.dart';
-import 'package:rsos_application/Location/GasNearby.dart';
+import 'package:rsos_application/Location/Destination/Destination.dart';
+import 'package:rsos_application/Location/GasNearby/GasNearby.dart';
 import 'package:rsos_application/SafetyTips/FirstAid/FisrtAid.dart';
 import 'package:rsos_application/components/constant.dart';
 
@@ -42,9 +42,9 @@ Widget _buildFirstAidButton(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FirstAidPage()));
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => FirstAidPage()));
           },
           child: Text(
             "First Aid",

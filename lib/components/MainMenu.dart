@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rsos_application/Location/Destination.dart';
-import 'package:rsos_application/Location/GasNearby.dart';
+import 'package:rsos_application/Location/Destination/Destination.dart';
+import 'package:rsos_application/Location/GasNearby/GasNearby.dart';
 import 'package:rsos_application/Location/LocationPage.dart';
 import 'package:rsos_application/News/NewsPage.dart';
 import 'package:rsos_application/Report/ReportPage.dart';
@@ -9,6 +10,7 @@ import 'package:rsos_application/Weather/WeatherPage.dart';
 import 'package:rsos_application/components/HomePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rsos_application/components/constant.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class BottomNav extends StatefulWidget {
   @override
@@ -16,15 +18,54 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late User user;
+  bool isloggedin = false;
+
+  checkAuthentification() async {
+    _auth.authStateChanges().listen((user) {
+      if (user == null) {
+        Navigator.of(context).pushReplacementNamed("start");
+      }
+    });
+  }
+
+  getUser() async {
+    User? firebaseUser = _auth.currentUser;
+    await firebaseUser?.reload();
+    firebaseUser = _auth.currentUser;
+
+    if (firebaseUser != null) {
+      setState(() {
+        this.user = firebaseUser!;
+        this.isloggedin = true;
+      });
+    }
+  }
+
+  signOut() async {
+    _auth.signOut();
+
+    final googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.checkAuthentification();
+    this.getUser();
+  }
+
   int currentTab = 0; // to keep track of active tab index
   final List<Widget> screens = [
-    HomePage(),
+    Start(),
     NewsPage(),
     WeatherHome(),
     SafetyTips(),
     LocationPage(),
     ReportPage(),
-    GasNearby(),
+    // GasNearby(),
     Destination(),
   ]; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
@@ -33,6 +74,16 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(elevation: 0.0,backgroundColor: Color(0xff14213d),
+      actions: [
+        IconButton(
+              onPressed: () {
+                  signOut();
+              },
+              icon: Icon(Icons.logout_outlined
+              ,color: white,),
+            )
+      ],),
       body: PageStorage(
         child: currentScreen,
         bucket: bucket,
@@ -61,6 +112,7 @@ class _BottomNavState extends State<BottomNav> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+
                   MaterialButton(
                     minWidth: 40,
                     onPressed: () {
