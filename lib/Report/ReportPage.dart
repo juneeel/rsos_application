@@ -9,7 +9,7 @@ class ReportPage extends StatefulWidget {
 
 }
 
-String url= 'tel:+91224578781';
+String url= 'tel:911';
 Future<void> callnow() async{
   if(await canLaunch(url))
   {
