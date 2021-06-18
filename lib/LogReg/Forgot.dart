@@ -4,6 +4,7 @@ import 'package:rsos_application/LogReg/Register.dart';
 import 'package:rsos_application/components/MainMenu.dart';
 import 'package:rsos_application/components/constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import "package:package_info/package_info.dart";
 class ForgotPass extends StatefulWidget {
   @override
   _ForgotPassState createState() => _ForgotPassState();

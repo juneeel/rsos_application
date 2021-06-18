@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rsos_application/LogReg/Login.dart';
 import 'package:rsos_application/components/constant.dart';
+import "package:package_info/package_info.dart";
 
 class ForgetConfirm extends StatefulWidget {
   @override

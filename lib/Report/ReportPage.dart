@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rsos_application/components/constant.dart';
 import 'package:sms/sms.dart';
 import 'package:url_launcher/url_launcher.dart';
+import "package:package_info/package_info.dart";
 
 class ReportPage extends StatefulWidget {
   @override

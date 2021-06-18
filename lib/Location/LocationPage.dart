@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart' as latlng;
+import "package:package_info/package_info.dart";
 
 class Location extends StatefulWidget {
   const Location({Key? key}) : super(key: key);

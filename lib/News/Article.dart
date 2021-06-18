@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
+import "package:package_info/package_info.dart";
 
 class ArticalNews extends StatefulWidget {
   final newsUrl;

@@ -11,6 +11,7 @@ import 'package:rsos_application/components/HomePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rsos_application/components/constant.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import "package:package_info/package_info.dart";
 
 class BottomNav extends StatefulWidget {
   @override

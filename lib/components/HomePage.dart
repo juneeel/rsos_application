@@ -6,6 +6,7 @@ import 'package:rsos_application/LogReg/Register.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rsos_application/components/constant.dart';
 import 'constant.dart';
+import "package:package_info/package_info.dart";
 
 class Start extends StatefulWidget {
   @override

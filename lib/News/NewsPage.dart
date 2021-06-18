@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'Article.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import "package:package_info/package_info.dart";
 
 class NewsPage extends StatefulWidget {
   @override

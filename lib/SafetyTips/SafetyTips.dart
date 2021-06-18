@@ -5,6 +5,7 @@ import 'package:rsos_application/SafetyTips/FirstAid/FisrtAid.dart';
 import 'package:rsos_application/SafetyTips/MHS/MHS.dart';
 import 'package:rsos_application/SafetyTips/MST/MST.dart';
 import 'package:rsos_application/components/constant.dart';
+import "package:package_info/package_info.dart";
 
 class SafetyTips extends StatefulWidget {
   @override

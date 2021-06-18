@@ -4,6 +4,7 @@ import 'package:rsos_application/LogReg/Login.dart';
 import 'package:rsos_application/components/MainMenu.dart';
 import 'LogReg/Register.dart';
 import 'components/HomePage.dart';
+import "package:package_info/package_info.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
