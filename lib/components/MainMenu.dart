@@ -63,7 +63,7 @@ class _BottomNavState extends State<BottomNav> {
     NewsPage(),
     WeatherHome(),
     SafetyTips(),
-    LocationPage(),
+    Location(),
     ReportPage(),
     // GasNearby(),
     Destination(),
@@ -201,7 +201,7 @@ class _BottomNavState extends State<BottomNav> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                            LocationPage(); // if user taps on this dashboard tab will be active
+                            Location(); // if user taps on this dashboard tab will be active
                         currentTab = 3;
                       });
                     },

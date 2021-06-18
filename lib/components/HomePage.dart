@@ -5,6 +5,7 @@ import 'package:rsos_application/LogReg/Login.dart';
 import 'package:rsos_application/LogReg/Register.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rsos_application/components/constant.dart';
+import 'constant.dart';
 
 class Start extends StatefulWidget {
   @override
@@ -74,7 +75,7 @@ class _StartState extends State<Start> {
                           style: TextStyle(
                               fontSize: 30.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.red))
+                              color: Color(0xffd90429)))
                     ])),
             SizedBox(height: 10.0),
             Text(

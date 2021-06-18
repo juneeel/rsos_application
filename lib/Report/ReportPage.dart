@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:rsos_application/Location/Destination/Destination.dart';
-import 'package:rsos_application/Location/GasNearby/GasNearby.dart';
 import 'package:rsos_application/components/constant.dart';
+import 'package:sms/sms.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReportPage extends StatefulWidget {
   @override
   _ReportPageState createState() => _ReportPageState();
+
 }
+
+String url= 'tel:+91224578781';
+Future<void> callnow() async{
+  if(await canLaunch(url))
+  {
+    await launch(url);
+  }else
+  {
+    throw 'call not possible';
+  }
+}
+
+   Future<Null> sendSms() async {
+     SmsSender smsSender = new SmsSender();
+     smsSender.sendSms(new SmsMessage('09218496886', 'HELP HELP'));
+   }
 
 Widget _buildLogo() {
   return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.symmetric(vertical: 0),
           child: Image.asset('assets/img/IconNoBackground.png', height:300,width: 300,),
         ),
       ]
@@ -41,7 +58,7 @@ Widget _buildLevel1Button(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-
+            sendSms();
           },
           child: Text(
             "Severe Level 1",
@@ -81,7 +98,7 @@ Widget _buildLevel2Button(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-
+            sendSms();
           },
           child: Text(
             "Severe level 2",
@@ -121,7 +138,8 @@ Widget _buildLevel3Button(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-
+            callnow();
+            sendSms();
           },
           child: Text(
             "Severe Level 3",
@@ -161,7 +179,8 @@ Widget _buildLevel4Button(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-
+            callnow();
+            sendSms();
           },
           child: Text(
             "Severe Level 4",

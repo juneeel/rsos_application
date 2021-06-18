@@ -1,135 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:rsos_application/Location/Destination/Destination.dart';
-import 'package:rsos_application/Location/GasNearby/GasNearby.dart';
-import 'package:rsos_application/components/constant.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart' as latlng;
 
-// import 'ViewMap.dart';
+class Location extends StatefulWidget {
+  const Location({Key? key}) : super(key: key);
 
-class LocationPage extends StatefulWidget {
   @override
-  _LocationPageState createState() => _LocationPageState();
+  _LocationState createState() => _LocationState();
 }
 
-Widget _buildLogo() {
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Image.asset('assets/img/IconNoBackground.png', height:300,width: 300,),
-        ),
-      ]
-  );
-}
-
-Widget _buildGasNearbyButton(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          height: 1.4 * (MediaQuery
-              .of(context)
-              .size
-              .height / 20),
-          width: 5 * (MediaQuery
-              .of(context)
-              .size
-              .width / 10),
-          margin: EdgeInsets.only(bottom: 20),
-          child: RaisedButton(
-            elevation: 5.0,
-            color: SC,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => ViewMap()));
-            },
-            child: Text(
-              "Gas Nearby",
-              style: TextStyle(
-                color: Colors.white,
-                letterSpacing: 1.5,
-                fontSize: MediaQuery
-                    .of(context)
-                    .size
-                    .height / 40,
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-
-Widget _buildDestinationButton(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      Container(
-        height: 1.4 * (MediaQuery.of(context).size.height / 20),
-        width: 5 * (MediaQuery.of(context).size.width / 10),
-        margin: EdgeInsets.only(bottom: 5),
-        child: RaisedButton(
-          elevation: 5.0,
-          color: TC,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Destination()));
-          },
-          child: Text(
-            "Destination",
-            style: TextStyle(
-              color: Colors.white,
-              letterSpacing: 1.5,
-              fontSize: MediaQuery.of(context).size.height / 40,
-            ),
-          ),
-        ),
-      )
-    ],
-  );
-}
-
-class _LocationPageState extends State<LocationPage> {
+class _LocationState extends State<Location> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xfff2f3f7),
-        body: Stack(
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: BG,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: const Radius.circular(70),
-                    bottomRight: const Radius.circular(70),
-                  ),
-                ),
-              ),
-            ),
-            ListView(
-              children: <Widget>[
-                _buildLogo(),
-                _buildGasNearbyButton(context),
-                _buildDestinationButton(context),
-              ],
-            ),
-          ],
-        ),
+    return Scaffold(
+    body:FlutterMap(
+      options: MapOptions(
+        center: latlng.LatLng(14.5995, 120.9842),
+        zoom: 13.0,
       ),
+      layers: [
+        TileLayerOptions(
+            urlTemplate: "https://api.mapbox.com/styles/v1/juuneeel/ckphy53dj1f7117qws0fnrqdy/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianV1bmVlZWwiLCJhIjoiY2twaHBlZzdrMGk0MDJvcGVhcHhxYzNuYSJ9.cH6xwcpN1AXmpMqTsuZrHA",
+            additionalOptions: {
+              'accessToken': 'pk.eyJ1IjoianV1bmVlZWwiLCJhIjoiY2twaHBlZzdrMGk0MDJvcGVhcHhxYzNuYSJ9.cH6xwcpN1AXmpMqTsuZrHA',
+              'id': 'mapbox.mapbox-streets-v8'
+            }
+        ),
+        // MarkerLayerOptions(
+        //   markers: [
+        //     Marker(
+        //       width: 80.0,
+        //       height: 80.0,
+        //       point: latlng.LatLng(14.5995, 120.9842),
+        //       builder: (ctx) =>
+        //           Container(
+        //             child: FlutterLogo(),
+        //           ),
+        //     ),
+        //   ],
+        // ),
+      ],
+    ),
     );
   }
 }

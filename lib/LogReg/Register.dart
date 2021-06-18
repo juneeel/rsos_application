@@ -11,7 +11,7 @@ class _SignUpState extends State<SignUp> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late String _name, _email, _password;
+  late String _name, _email, _password, _cPassword, _plateNum;
 
   checkAuthentication() async {
     _auth.authStateChanges().listen((user) async {
@@ -102,6 +102,45 @@ class _SignUpState extends State<SignUp> {
                         Container(
                           child: TextFormField(
                               validator: (input) {
+                                if (input!.isEmpty) return 'Enter Phone Number';
+                              else if(input.length < 6){
+                                  return 'Enter Valid Number';
+                              }
+                            },
+                              decoration: InputDecoration(
+                                labelText: 'Phone Number',
+                                labelStyle: TextStyle(color: white),
+                                prefixIcon: Icon(Icons.phone, color: white,),
+                              ),
+                              onSaved: (input) => _name = input!),
+                        ),
+                        Container(
+                          child: TextFormField(
+                              validator: (input) {
+                                if (input!.isEmpty) return 'Enter Plate Number';
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'Plate Number',
+                                labelStyle: TextStyle(color: white),
+                                prefixIcon: Icon(Icons.credit_card_sharp, color: white,),
+                              ),
+                              onSaved: (input) => _name = input!),
+                        ),
+                        Container(
+                          child: TextFormField(
+                              validator: (input) {
+                                if (input!.isEmpty) return 'Enter Motorcycle Type';
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'Motorcycle Type',
+                                labelStyle: TextStyle(color: white),
+                                prefixIcon: Icon(Icons.motorcycle, color: white,),
+                              ),
+                              onSaved: (input) => _name = input!),
+                        ),
+                        Container(
+                          child: TextFormField(
+                              validator: (input) {
                                 if (input!.isEmpty) return 'Enter Email';
                               },
                               decoration: InputDecoration(
@@ -126,6 +165,22 @@ class _SignUpState extends State<SignUp> {
                               ),
                               obscureText: true,
                               onSaved: (input) => _password = input!),
+                        ),
+                        Container(
+                          child: TextFormField(
+                              validator: (input) {
+                                if (input! != _password)
+                                  return 'Incorrect Password';
+                                else if(input.isEmpty)
+                                  return 'Enter Password';
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'Confirm Password',
+                                labelStyle: TextStyle(color: white),
+                                prefixIcon: Icon(Icons.lock, color: white,),
+                              ),
+                              obscureText: true,
+                          ),
                         ),
                         SizedBox(height: 20),
                         RaisedButton(

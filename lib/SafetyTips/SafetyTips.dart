@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rsos_application/Location/Destination/Destination.dart';
 import 'package:rsos_application/Location/GasNearby/GasNearby.dart';
 import 'package:rsos_application/SafetyTips/FirstAid/FisrtAid.dart';
+import 'package:rsos_application/SafetyTips/MHS/MHS.dart';
+import 'package:rsos_application/SafetyTips/MST/MST.dart';
 import 'package:rsos_application/components/constant.dart';
 
 class SafetyTips extends StatefulWidget {
@@ -42,9 +44,9 @@ Widget _buildFirstAidButton(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => FirstAidPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FirstAid()));
           },
           child: Text(
             "First Aid",
@@ -84,7 +86,9 @@ Widget _buildRoadButton(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MHS()));
           },
           child: Text(
             "Motorcycle Hand Signs",
@@ -124,7 +128,9 @@ Widget _buildEtiquettesButton(BuildContext context) {
             borderRadius: BorderRadius.circular(30.0),
           ),
           onPressed: () {
-
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MST()));
           },
           child: Text(
             "Motorcycle Safety Techniques",
@@ -169,8 +175,8 @@ class _SafetyTipsState extends State<SafetyTips> {
               children: <Widget>[
                 _buildLogo(),
                 _buildFirstAidButton(context),
-                _buildEtiquettesButton(context),
                 _buildRoadButton(context),
+                _buildEtiquettesButton(context),
               ],
             ),
           ],

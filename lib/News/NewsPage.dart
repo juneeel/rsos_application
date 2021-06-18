@@ -111,7 +111,6 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-
         child:  Scaffold(
           backgroundColor: Color(0xff14213d),
           drawer: ListView(
@@ -301,7 +300,6 @@ class _NewsPageState extends State<NewsPage> {
           },
           itemCount: news.length,
         ),
-
       ),
     );
   }
